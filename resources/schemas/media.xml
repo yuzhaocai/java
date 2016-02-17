@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<schema name="media" version="1.5">
+	<field name="_version_" type="long" indexed="true" stored="true"/>
+
+	<field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
+	<field name="name" type="text_ik" indexed="true" stored="true" required="true" multiValued="false" /> 
+	<field name="description" type="text_ik" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="showPic" type="string" indexed="false" stored="true" required="false" multiValued="false" /> 
+	<field name="qrCode" type="string" indexed="false" stored="true" required="false" multiValued="false" /> 
+	<field name="mediaType" type="string" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="category" type="string" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="categoryName" type="text_ik" indexed="true" stored="true" required="false" multiValued="false" />
+	<field name="industryTypes" type="string" indexed="true" stored="true" required="false" multiValued="true" /> 
+	<field name="industryTypeNames" type="text_ik" indexed="true" stored="true" required="false" multiValued="true" /> 
+	<field name="regions" type="string" indexed="true" stored="true" required="false" multiValued="true" /> 
+	<field name="products" type="string" indexed="true" stored="true" required="false" multiValued="true" /> 
+	<field name="tags" type="string" indexed="true" stored="true" required="false" multiValued="true" />
+	<field name="tagNames" type="text_ik" indexed="true" stored="true" required="false" multiValued="true" />
+	<field name="fans" type="int" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="fansDirs" type="string" indexed="true" stored="true" required="false" multiValued="true" /> 
+	<field name="createTime" type="long" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="modifyTime" type="long" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="status" type="string" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="level" type="string" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="prices" type="int" indexed="true" stored="true" required="false" multiValued="true" /> 
+	<field name="serviceTypes" type="string" indexed="true" stored="true" required="false" multiValued="true" /> 
+	
+	<uniqueKey>id</uniqueKey>
+ 	
+ 	<fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+    <fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="date" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0"/>
+
+	<fieldType name="text_ik" class="solr.TextField">
+		<analyzer>
+			<tokenizer class="org.wltea.analyzer.solr.IKTokenizerFactory" useSmart="false" />
+		</analyzer>
+	</fieldType>
+
+</schema>

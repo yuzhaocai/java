@@ -1,0 +1,364 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspf/common.jsp" %>
+
+<!-- 媒体模板 -->
+<script type="text/template" id="mediaTemp">
+	<li>
+	    <div class="thumbnail thumbnail-display">
+			<div class="photo-wrap">
+	        <a href="${ctx}/${param.prefix}/detail/{id}"  target="_blank" >
+	            <img src="{showPic}" class="photo">
+	            <span class="photo-mask"></span>
+	        </a>
+			<button type="button" onclick="window.open('${ctx}/${param.prefix}/detail/{id}#e')">查看报价</button>
+			</div>
+	        <div class="thumbnail-block caption">
+	            <h1 class="thumbnail-title"><a href="${ctx}/${param.prefix}/detail/{id}"  target="_blank" >{name}</a></h1> 
+	            <ul class="list-unstyled thumbnail-text">                                   
+	                <li>类别：<span>{category}</span></li>
+	                <li>粉丝：<span>{fans}</span></li>
+	                <li>行业：<p class="trades">
+						<span>{industryType1}</span>
+						<span>{industryType2}</span>
+					</p>
+					</li>
+	            </ul>
+	        </div>
+	        <div class="thumbnail-block">
+	        	<hr>
+	            <p class="thumbnail-text">简介：<span>{description}</span><a href="${ctx}/${param.prefix}/detail/{id}#a"  target="_blank" >[详情]</a></p>
+	        </div>
+			<div class="float-floor"></div>
+            <div class="float-checkbox">
+			  <i class="fa fa-check"></i><input type="checkbox" name="media" value="{id}">
+			  <input type="hidden" name="price" value="{prices}">
+		    </div>
+	    </div> 
+		<div class="thumbnail card hide">
+			<div class="thumbnail-block">
+				<h1 class="thumbnail-title"><a href="${ctx}/${param.prefix}/detail/{id}"  target="_blank">{name}</a></h1>
+				<hr class="hr-xs">
+				<ul class="list-unstyled thumbnail-text">
+					<li><i>类</i>类别：<span>{category}</span></li>
+					<li><i>粉</i>粉丝：<span>{fans}</span></li>
+					<li><i>行</i>行业：<span>{industryTypes}</span></li>
+				</ul>
+			</div>
+		</div>
+	</li>
+</script>
+<script type="text/template" id="mediaTemp2">
+<li>
+  	<div class="thumbnail-v2">
+          <div class="toparea">
+              <div class="photo-wrap">
+                  <img src="{showPic}" class="photo">
+                  <span class="photo-mask"></span>
+              </div>
+              <div class="info-wrap">
+                  <ul class="ul-detail">
+                      <li class="tt"><a href="#">{name}</a></li>                                    
+                      <li><p>类别：<span>{category}</span></p><p><a href="#" target="_blank" class="highlight">查看报价</a></p></li>
+                      <li>
+                      	<p>粉丝：<span>{fans}</span></p>
+                      	<p>行业：<span>{industryTypes}</span></p>
+                      </li>
+                  </ul>
+              </div>
+          </div>                                    
+          <div class="innerarea">
+              <ul class="ul-detail">
+                  <li class="jj">简介：<span>{description}</span></li>
+              </ul>
+          </div>
+          <div class="float-floor"></div>
+          <div class="float-checkbox">
+			<i class="fa fa-check"></i><input type="checkbox" name="media" value="{id}">
+			<input type="hidden" name="price" value="{prices}">
+		  </div>
+      </div>
+</li>
+</script>
+
+<!-- 媒体报价输入域模板 -->
+<script type="text/template" id="quoteTemp">
+	<input type="hidden" name="quotes[{index}].media.id" value="{mid}" class="quotes" >
+	<input type="hidden" name="quotes[{index}].type"     value="{type}" >
+	<input type="hidden" name="quotes[{index}].price"    value="{price}" >
+</script>
+
+<script type="text/javascript">
+
+var $createForm = $('#create-form');
+
+/* 更新选择的媒体数量和订单金额 */
+function updateTotal() {
+	var $medias = $('.float-checkbox [name="media"]:checked');
+	var totalMedias = $medias.length;
+	var totalAmount = 0;
+	$medias.each(function() {
+		totalAmount += parseInt($(this).siblings('[name="price"]').val());
+	});
+	$('.mediaCount').text(totalMedias);
+	$('.totalAmount').text(totalAmount);
+};
+String.prototype.endWith=function(s){
+    if(s==null||s==""||this.length==0||s.length>this.length)
+   		return false;
+    if(this.substring(this.length-s.length)==s)
+    	return true;
+    else
+    	return false;
+    return true;
+}
+String.prototype.startWith=function(s){
+	if(s==null||s==""||this.length==0||s.length>this.length)
+		return false;
+	if(this.substr(0,s.length)==s)
+		return true;
+	else
+		return false;
+	return true;
+}
+/*
+ * 获取查询参数.
+ */
+function getParams() {
+	var paramsArray = $createForm.serializeArray();
+	var params = new Array();
+	for (i = 0; i < paramsArray.length; i++) {
+		if (paramsArray[i] != null && !paramsArray[i].name.startWith("regions[") && !paramsArray[i].name.startWith("industryTypes[")) {
+			params[i] = paramsArray[i];
+		}
+	}
+	return params;
+};
+
+/* 查询媒体 */
+function queryMedias(pageNum) {
+	
+	var $loading = $('<span class="loading"></span>');
+	$('.panel-heading').append($loading);
+	var params = getParams();
+	var data;
+	for (i = 0; i < params.length; i++) {
+		if (params[i] != null && params[i].name != null && params[i].value != null){
+			if (i == 0) {
+				data = params[i].name + "=" + params[i].value;
+			} else {
+				data += "&" + params[i].name + "=" + params[i].value;
+			}
+		}
+	}
+	data += '&pageNum=' + pageNum;
+	data += '&sort=modifyTime desc';
+	$.post('${ctx}/member/req/advertiser/queryMedias', data, function(data) {
+		var page = $.parseJSON(data);
+		if( page.result ) {
+			var $temp = $('#mediaTemp');
+			var html = [];
+			var serviceTypesValue = $("#serviceTypes").find("option:selected").text()
+			
+			$.each(page.data, function(i, o) {
+				var prices = o.prices;
+				var serviceTypes = o.serviceTypes.split(',');
+				var index;
+				for (var i = 0; i < serviceTypes.length; i ++){
+					if (serviceTypesValue == serviceTypes[i]) {
+						o.prices = prices[i];
+						break;
+					}
+				}
+				html.push($temp.format(o));
+			});
+			
+			$('#media-list').append(html.join(''));
+			
+			$loading.remove();
+			$('.prod-list > li >.thumbnail-display').each(function(index ,element) {
+				var element = $(element);
+				var id = element.attr('id');
+				var txt = $(this).next().prop("outerHTML").replace("hide", "");
+				var direction;
+				if ((index + 1) % 4 == 0) {
+					direction = 'left';
+				} else {
+					direction = 'right';
+				}
+				element.popover({
+				  animation:'false',
+				  trigger: 'manual',
+				  placement: direction, //top, bottom, left or right
+				  title: '',
+				  html: 'true',
+				  content: txt,
+				}).on("mouseenter", function () {
+				  var _this = this;
+				  $(this).popover("show");
+				  $(this).siblings(".popover").on("mouseleave", function () {
+					$(_this).popover('hide');
+				  });
+				  			 
+				}).on("mouseleave", function () {
+				  var _this = this;
+				  setTimeout(function () {
+					if (!$(".popover:hover").length) {
+					  $(_this).popover("hide")
+					}
+				  });
+				});
+				
+			});
+			updateLoadMore(page);
+		}
+	});
+	
+};
+
+/* 更新加载更多按钮的状态 */
+function updateLoadMore(page) {
+	var data = $('#btn-more').data();
+	data.pageTotal = page.totalPage;
+	data.pageNum = page.pageNum;
+	
+	//common.log('load pageNum: ' + data.pageNum);
+	//common.log('load pageTotal: ' + data.pageTotal);
+	
+	if( page.pageNum < page.totalPage ) {
+		$('#load-more').show();
+	} else {
+		$('#load-more').hide();
+	}
+}
+
+//-------------------------------------------------------- 校验表单
+/*
+ * 提交表单时, 组装接单媒体信息.
+ */
+function setMediaPrice(form) {
+	var serviceTypes = $('#serviceTypes').val();
+	var $medias = $('[name="media"]:checked');
+	var quotes = [];
+	var index = $('input.quotes').length;
+	$medias.each(function() {
+		quotes.push({
+			index: index++,
+			mid: this.value,
+			type : serviceTypes,
+			price: $(this).siblings('[name="price"]').val()
+		});
+	});
+	var $temp = $('#quoteTemp');
+	var html = [];
+	$.each(quotes, function(i, o) {
+		html.push($temp.format(o));
+	});
+	$createForm.append(html.join(''));	
+}
+
+//- 校验表单	
+$createForm.validate({
+	debug: false,
+	submitHandler: function(form) {
+		if( $('[name="media"]:checked').length == 0 ) {
+			common.showMessage('您还没有选择接单媒体!', 'warn');
+			return false;
+		}
+		setMediaPrice(form);
+		//common.disabled('#btn-next');
+		form.submit(); 
+	}, 
+	rules: {
+		serviceTypes: {
+			required: true
+		}
+	},
+	messages: {
+		serviceTypes: {
+			required: '请选择服务类别'
+		}
+	}
+});
+//- /校验表单	
+
+$(function() {
+	menu.active('#my-req');
+	
+	$('#btn-more').click(function() {
+		var data = $(this).data();
+		var pageNum   = data.pageNum + 1;
+		var pageTotal = data.pageTotal;
+		//common.log('pageNum: ' + pageNum);
+		//common.log('pageTotal: ' + pageTotal);
+		if( pageNum <= pageTotal ) {
+			queryMedias(pageNum);
+		}
+	});
+	$('#btn-submit').click(function() {
+		$('#create-form').submit();
+	})
+	
+	$('#serviceTypes').change(function() {
+		if( $(this).val() != "" ) {
+			$('.media-panel').removeClass('hide');
+			$('#media-list').empty();
+			queryMedias(1);
+		}
+	});
+	
+	/* 绑定选择媒体事件 */
+	$('#media-list').delegate('li .float-checkbox', 'click', function() {
+		var checkbox=$(this).find("input[name='media']")[0];
+		if( checkbox.checked ) {
+			checkbox.checked = false;
+			$(this).parents('.thumbnail').removeClass('selected');
+		} else{
+			checkbox.checked = true;
+			$(this).parents('.thumbnail').addClass('selected');
+		}
+		updateTotal();
+	});
+	
+	/* 在结果中筛选媒体 */
+	// 高亮筛选条件
+	function active(el, name) {
+		if( $(el).is('.active') ) {
+			return false;
+		}
+		
+		$(el).siblings('.active').removeClass('active');
+		var value = $(el).data('value');
+		if( '' != value ) {
+			$(el).addClass('active');
+		}
+		
+		setValue(el, name);
+	}
+	// 执行筛选
+	function setValue(el, name) {
+		var value = $(el).data('value');
+		$createForm.find('[name="' + name + '"]').val(value);
+		$('#media-list').empty();
+		queryMedias(1);
+	}
+	
+	$('.categories').click(function() {
+		active(this, 'category');
+	});
+	$('#regions').delegate('.regions', 'click', function() {
+		var value = $(this).data('value');
+		$createForm.find("input[name='regions']").val(value);
+		active(this, "regions");
+	});
+	$('.industryTypes').click(function() {
+		var value = $(this).data('value');
+		$createForm.find("input[name='industryTypes']").val(value);
+		active(this, 'industryTypes');
+	});
+	$('.fans').click(function() {
+		active(this, 'fans');
+	});
+	
+	/*/在结果中筛选媒体 */
+});
+</script>

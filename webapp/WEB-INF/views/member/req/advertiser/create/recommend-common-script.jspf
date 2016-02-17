@@ -1,0 +1,288 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspf/common.jsp" %>
+
+<!-- 媒体列表模板 -->
+<script type="text/template" id="mediaTemp">
+<tr>
+  <td class="text-left">{name}</td>
+  <td width="120">{mediaType}</td>
+  <td width="120">{category}</td>
+  <td width="80">{regions}</td>
+  <td width="80">{fans}</td>
+  <td width="100"><a href="${ctx}/weixin/detail/{id}" target="_blank">查看</a></td>
+  <td width="80">
+	<input type="text" class="form-control input-sm text-right " readonly="readonly" name="price" value="{prices}" maxlength="10"
+      onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+  </td>
+  <td width="80" class="center">
+	<input type="checkbox" name="media" value="{id}" onclick="updateTotal()" />
+  </td>
+  <td width="80" class="center">
+	<button type="button" class="btn btn-sm btn-link btn-change-me"><span class="glyphicon glyphicon-refresh"></span> 换一换</button>
+  </td>
+</tr>
+</script>
+<!-- 媒体列表模板2 -->
+<script type="text/template" id="mediaTempNotChange">
+<tr>
+  <td class="text-left">{name}</td>
+  <td width="120">{mediaType}</td>
+  <td width="120">{category}</td>
+  <td width="80">{regions}</td>
+  <td width="80">{fans}</td>
+  <td width="100"><a href="${ctx}/weixin/detail/{id}" target="_blank">查看</a></td>
+  <td width="80">
+	<input type="text" class="form-control input-sm text-right " readonly="readonly" name="price" value="{prices}" maxlength="10"
+      onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+  </td>
+  <td width="80" class="center">
+	<input type="checkbox" name="media" value="{id}" onclick="updateTotal()" />
+  </td>
+</tr>
+</script>
+
+<!-- 媒体报价输入域模板 -->
+<script type="text/template" id="quoteTemp">
+	<input type="hidden" name="quotes[{index}].media.id" value="{mid}" class="quotes" >
+	<input type="hidden" name="quotes[{index}].type"     value="{type}" >
+	<input type="hidden" name="quotes[{index}].price"    value="{price}" >
+</script>
+                
+<script type="text/javascript">
+
+//更新总金额和选择的媒体总数
+function updateTotal() {
+	var $medias = $('[name="media"]:checked');
+	var totalMedias = $medias.length;
+	var totalAmount = 0;
+	$medias.each(function() {
+		totalAmount += parseInt($(this).closest('tr').find('[name="price"]').val());
+	});
+	$('#totalMedias').text(totalMedias);
+	$('#totalAmount').text(totalAmount);
+}
+
+var $createForm = $('#create-form');
+
+/*
+ * 获取查询参数.
+ */
+function getParams() {
+	var params = $createForm.serialize();
+	return params;
+}
+
+/*
+ * ajax 请求成功后，更新媒体列表的内容.
+ */
+function flushMedias(tbody, page) {
+	//common.log(page);
+	var $temp = $('#mediaTemp');
+	var $tempNotChange = $('#mediaTempNotChange');
+	var html = [];
+	var thatPage = page;
+	var serviceTypesValue = $("#serviceTypes").find("option:selected").text()
+	$.each(page.data, function(i, o) {
+		var prices = o.prices;
+		var serviceTypes = o.serviceTypes.split(',');
+		var index;
+		for (var i = 0; i < serviceTypes.length; i ++){
+			if (serviceTypesValue == serviceTypes[i]) {
+				o.prices = prices[i];
+				break;
+			}
+		}
+		if (thatPage.totalPage <= 1) {
+			html.push($tempNotChange.format(o));
+		} else {
+			html.push($temp.format(o));
+		}
+	});
+	
+	var $tbody = $(tbody);
+	$tbody.html(html);
+	
+	var pageNum = page.pageNum;
+	var totalPage = page.totalPage;
+	var pageSize = page.pageSize;
+	var data = $tbody.data();
+	var total = page.total;
+	data.pageNum = pageNum;
+	data.pageTotal = totalPage;
+	data.total = total - pageSize + 1;
+	data.pageSize = pageSize;
+}
+
+
+/*
+ * 分级加载推荐的媒体列表.
+ */
+function loadMedias(level, pageNum) {
+	var url = '${ctx}/member/req/advertiser/loadMedias?ajax';
+	var $tbody = $('#level'+level);
+	$tbody.closest('table').prev('div').find('h5').append('<span class="loading"></span>');
+	
+	var params = getParams();
+	params += '&level=' + level;
+	params += '&pageNum=' + pageNum;
+	params += '&sort=modifyTime desc';
+	$.post(url, params, function(data) {
+		$tbody.closest('table').prev('div').find('.loading').remove();
+		if( data.result ) {
+			flushMedias('#level'+level, data);
+			//保存查询条件
+			$tbody.data('fields-map', data.fieldsMap);
+		}
+	});
+}
+
+/*
+ * 换一换.
+ */
+function loadOneMedia(el) {
+	var $this = $(el);
+	var data = $this.closest('tbody').data();
+	common.log(data);
+	var $tr = $this.closest('tr');
+	var excludes = [];
+	$tr.siblings().each(function() {
+		excludes.push($(this).find('input[name="media"]').val());
+	});
+	var level = data.level;
+	$this.closest('table').prev('div').find('h5').append('<span class="loading"></span>');
+	
+	var url = '${ctx}/member/req/advertiser/loadOneMedia?ajax';
+	var params = getParams();
+	var totoal = data.total;
+	if (totoal == data.pageNum){
+		data.pageNum = 1;
+	} else {
+		data.pageNum += 1;
+	}
+	params += '&level=' + level;
+	params += '&excludes=' + excludes;
+	params += '&fieldsMap=' + data.fieldsMap;
+	params += '&pageNum=' + data.pageNum;
+	params += '&sort=modifyTime desc';
+	$.post(url, params, function(data) {
+		var that = $this.closest('tbody').data();
+		$this.closest('table').prev('div').find('.loading').remove();
+		var obj = data;
+		if( (typeof data) == 'string' ) {
+			obj = $.parseJSON(data);
+		}
+		var serviceTypesValue = $("#serviceTypes").find("option:selected").text()
+		var prices = obj.data[0].prices;
+		var serviceTypes = obj.data[0].serviceTypes.split(',');
+		var index;
+		for (var i = 0; i < serviceTypes.length; i ++){
+			if (serviceTypesValue == serviceTypes[i]) {
+				obj.data[0].prices = prices[i];
+				break;
+			}
+		}
+		if( $.isPlainObject(obj) && obj.result == true ) {
+			var row = $('#mediaTemp').format(obj.data[0]);
+			//common.log(row);
+			$this.closest('tr').replaceWith(row);
+		}
+	});
+}
+
+/*
+ * 筛选条件变化后，重新加载媒体列表.
+ */
+function reloadMedias() {
+	loadMedias(1, 1);
+	loadMedias(2, 1);
+	loadMedias(3, 1);
+}
+
+//-------------------------------------------------------- 校验表单
+/*
+ * 提交表单时, 组装接单媒体报价.
+ */
+function setMediaPrice(form) {
+	var serviceTypes = $('#serviceTypes').val();
+	var $medias = $('[name="media"]:checked');
+	var quotes = [];
+	var index = $('input.quotes').length;
+	$medias.each(function() {
+		quotes.push({
+			index: index++,
+			mid: this.value,
+			type : serviceTypes,
+			price: $(this).closest('tr').find('[name="price"]').val()
+		});
+	});
+	var $temp = $('#quoteTemp');
+	var html = [];
+	$.each(quotes, function(i, o) {
+		html.push($temp.format(o));
+	});
+	$createForm.append(html.join(''));
+}
+
+
+
+$(function() {
+	menu.active('#my-req');
+	//- 校验表单
+	$createForm.validate({
+		debug: false,
+		submitHandler: function(form) {
+			if( $('[name="media"]:checked').length == 0 ) {
+				if($('#jGrowl').children().length<2){
+					common.showMessage('您还没有选择接单媒体!', 'warn');
+				}else{
+					common.shake($('#jGrowl'));
+				}
+				return false;
+			}
+			setMediaPrice(form);
+			//common.disabled('#btn-next');
+			form.submit();
+		}, 
+		rules: {
+			serviceTypes: {
+				required: true
+			}
+		},
+		messages: {
+			serviceTypes: {
+				required: '请选择服务类别'
+			}
+		}
+	});
+	//- /校验表单
+	
+	// 点击“换一换”按钮
+	$('tbody.medias-body').delegate('button.btn-change-me', 'click', function() {
+		loadOneMedia(this);
+	});
+	
+	// 点击“自行挑选媒体”按钮
+	$('#btn-self-select').click(function() {
+		var form = $('#create-form')[0];
+		form.action = '${ctx}/member/req/advertiser/create/select${param.mediaTypeCode }Media';
+		form.submit();
+	});
+	
+	// 初始化选择控件
+	$('.select-modal').selectModal();
+	
+	//生成推荐方案
+	$('#btn-gen-project').click(function() {
+		if($createForm.valid()) {
+			$('div.media-group').removeClass('hide');
+			reloadMedias();
+		}
+	});
+	
+	// 下一步
+	$('#btn-next').click(function() {
+		$createForm.submit();
+	});
+	
+});
+</script>

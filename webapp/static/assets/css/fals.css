@@ -1,0 +1,107 @@
+.header-v1 .navbar-header{margin:0}
+
+.mycaimei{margin-left:-75px;padding-top:20px}
+.mycaimei a{margin:5px 0;font-size:16px;font-weight:bold;line-height:22px;text-decoration:none}
+.mycaimei .caimeiIndex{display:block;width:96px;border:1px solid #ccc;border-radius:12px!important;text-align:center;font-size:15px;}
+.mycaimei .caimeiIndex:hover{border-color:#F00}
+
+.falsReminder{height:430px;padding-left:530px;padding-top:68px;background:url(../img/404BG.png) no-repeat left center}
+.falsReminder h3{padding-bottom:20px;color:#080103;font-size:43px}
+.falsReminder p{color:#666;font-size:16px}
+.falsReminder p span{color:#080103}
+.falsReminder p:nth-child(4){padding-bottom:30px}
+.falsReminder p a{margin-right:12px;color:#017cee}
+
+/* Tab List*/
+.tablist {
+	border-top:2px solid #8c8c8c;
+}
+.tab-v4 .nav-tabs {
+	border:none;
+}
+.tab-v4 .nav-tabs > li {
+	width:20%;
+}
+.tab-v4 .nav-tabs > li > a {
+	border-top:none;
+	border-right:none;
+	border-left:1px solid #bdbdbd;
+	border-bottom:1px solid #bdbdbd;
+	margin-right:0;
+	text-align:center;
+	font-weight:bold;
+}
+.tab-v4 .nav-tabs > li:last-child > a {
+	border-right: 1px solid #bdbdbd;
+}
+.tab-v4 .nav-tabs > li.active > a, 
+.tab-v4 .nav-tabs > li.active > a:focus, 
+.tab-v4 .nav-tabs > li.active > a:hover {
+	border-bottom:1px solid #8c8c8c;
+	border-left:1px solid #8c8c8c;
+	border-top:none;
+	border-right-width:0;
+	color:#fff;
+	background-color:#8c8c8c;
+}
+.tab-v4 .tab-content {
+	padding:12px 6px 10px;
+	margin-top:2px;
+	background:#f4f4f4;
+}
+.tab-v4 .tab-content .row,
+.tab-v4 .tab-content .col-xs-2 {
+	margin:0;
+	padding:0;
+}
+.tab-v4 .tab-content .col-xs-2{
+	width:192px;
+	margin:0 3px;
+}
+.tab-v4 .thumbnail-style {
+	margin-bottom:0;
+	padding:5px;
+}
+.tab-v4 .thumbnail-style:hover { 
+	box-shadow:none; 
+    transition:none;
+}
+.tab-v4 .thumbnails > a {
+	display:block;
+	position:relative;
+	width:180px;
+	height:180px;
+}
+.tab-v4 .thumbnails > a img {
+	width:180px;
+	height:180px;
+}
+.tab-v4 .thumbnails > a img:hover {
+	box-shadow:0 0 1px #c40000
+}
+.thumbnail-style h3{
+    margin:5px 0 0;	
+}
+
+.tab-v4 .thumbnail h3 a,
+.tab-v4 .thumbnail-style h3 a,
+.product .thumbnail h3,
+.product .thumbnail-style h3  {
+	display:block;
+	white-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsis;
+}
+
+.product .thumbnail h3 a, 
+.product .thumbnail-style h3 a {
+	font-size:16px;
+	color:#333;
+	text-align:center;
+}
+.product .thumbnail h3 a:hover, 
+.product .thumbnail-style h3 a:hover {
+	color:#ff5256;
+	text-decoration:underline;
+}
+

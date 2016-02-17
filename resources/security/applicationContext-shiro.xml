@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+    
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login" />
+		<property name="unauthorizedUrl" value="/error/403" />
+		<property name="filterChainDefinitions">
+			<value>
+				/static/**   = anon
+				/images/**   = anon
+				/img/**      = anon
+				/**/*.ico    = anon
+				/common/**   = anon
+				/ueditor/**  = anon
+				/error/**    = anon
+				
+				/mobile/**   = mobile
+				
+				/login/**    = authc
+				/logout      = user
+				
+				/plaza/**    = user
+				/security/** = user
+				/admin/**    = user, any[admin, web-editor, customer-service, advanced-cs, shichang, caiwu, operator, senior-operator, sales, senior-sales, ceshi, gaojiceshi, meijie, gaojimeijie, gaojishichang], perms
+				/org/**      = user, any[organization], perms, redirect[admin]
+				
+				/member/req/advertiser/queryMedias = anon, user
+				/member/req/download/** = user
+				/member/**              = user, any[advertiser, provider], perms, redirect[admin]
+				/**          = anon, redirect[admin, web-editor, customer-service, advanced-cs, shichang, caiwu, operator, senior-operator, sales, senior-sales, organization, ceshi, gaojiceshi, meijie, gaojimeijie, gaojishichang]
+				
+			</value>
+		</property>
+		<property name="filters">
+			<map>
+				<entry key="authc"    value-ref="captchaFormLoginFilter"  />
+				<entry key="any"      value-ref="anyRolesFilter" />
+				<entry key="perms"    value-ref="permissionsFilter" />
+				<entry key="redirect" value-ref="redirectFilter" />
+				<entry key="mobile"   value-ref="mobileSecurityFilter" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="mobileSecurityFilter" class="com.lczy.media.mobile.security.MobileSecurityFilter">
+		<property name="bypassPaths">
+			<list>
+				<value>/mobile/mcLogin/Login</value>
+				<value>/mobile/mcLogin/sendVerCode</value>
+				<value>/mobile/mcLogin/confirmVerCode</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:security/ehcache.xml" />
+	</bean>
+	
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+	   <!-- 全局会话超时设置，millisecond -->
+	   <property name="globalSessionTimeout" value="1800000" />
+	   <property name="sessionListeners">
+	       <list>
+                <bean class="com.lczy.media.security.SessionTimeoutListener" />
+	       </list>
+	   </property>
+	</bean>
+
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm" />
+		<property name="cacheManager" ref="shiroEhcacheManager" />
+		<property name="sessionManager" ref="sessionManager" />
+	</bean>
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    
+    <!-- 登录页面验证码设置 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.border.thickness">1</prop>
+						<prop key="kaptcha.image.width">100</prop>
+						<prop key="kaptcha.image.height">34</prop>
+						<prop key="kaptcha.producer.impl">com.google.code.kaptcha.impl.DefaultKaptcha</prop>
+						<!-- 获取中文 org.cric.util.ChineseText -->
+						<prop key="kaptcha.textproducer.impl">com.google.code.kaptcha.text.impl.DefaultTextCreator</prop>
+						<!-- <prop key="kaptcha.textproducer.char.string">abcde2345678gfynmnpwx</prop> -->
+						<prop key="kaptcha.textproducer.font.names">Arial, Courier</prop>
+						<prop key="kaptcha.textproducer.font.size">25</prop>
+						<prop key="kaptcha.textproducer.font.color">black</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<!-- 模糊效果 -->
+						<prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
+						<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+						<prop key="kaptcha.noise.color">gray</prop>
+						<!-- Starting background color. Legal values are r,g,b. -->
+						<prop key="kaptcha.background.clear.from">lightGray</prop>
+						<prop key="kaptcha.background.clear.to">white</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+	
+</beans>

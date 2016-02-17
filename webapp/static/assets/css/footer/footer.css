@@ -1,0 +1,92 @@
+/*Footer
+------------------------------------*/
+.footer-v1 {
+	margin-top:50px;
+}
+.footer-v1 .footer {
+	padding: 23px 0;	
+	background: #eee;
+}
+
+.footer-v1 .footer p {
+	color: #222;
+}
+
+.footer-v1 .footer h2 {
+	color: #222;
+	font-size: 18px;
+	font-weight: 200;
+}
+
+.footer-v1 address {
+	line-height: 23px;
+}
+
+/*Copyright*/
+.footer-v1 .copyright {
+	background: #ffffff;
+	border-top: none;
+	text-align:center;
+	padding-top:30px;
+	padding-bottom:30px;
+	
+}
+
+.footer-v1 .copyright p {
+	color: #666;
+	margin:9px 0;
+}
+
+.footer-v1 .copyright a {
+	margin: 0 2px;
+}
+.footer-v1 .copyright .img-item{
+	text-align:center;
+}
+.footer-v1 .copyright .img-item a {
+	display:inline-block;
+	width:120px;
+	height:50px;
+	overflow:hidden;
+}
+.footer-v1 .copyright .img-item a img {
+	max-width:100%;
+	max-height:100%;
+}
+/*
+.footer-v1 .footer-socials {
+	margin-top: 10px;
+	text-align: right;
+}
+
+.footer-v1 .footer-socials li a {
+	color: #777;
+	font-size: 16px;
+}
+*/
+/*Footer Logo*/
+.footer-logo {
+	margin: 17px 0 0;
+}
+
+/* Login Footer */
+#footer-2015 {
+	text-align:center;
+	padding-bottom:30px;
+	color:#666;
+	font-size:10px;
+}
+#footer-2015 .links a {
+	font-size:14px;
+	color:#666;
+	padding:0 2px;
+}
+#footer-2015 .links a:hover {	
+	color:#ff5256;
+}
+
+/*---2016-1-01-06 ------------*/
+.simple-list li{
+    line-height:32px;	
+	padding-left:2px;
+}

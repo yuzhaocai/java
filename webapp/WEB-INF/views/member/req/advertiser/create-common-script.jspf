@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspf/common.jsp" %>
+
+<script type="text/javascript">
+
+
+$(function() {
+	//行业类型和地区插件
+		$('.select-modal').selectModal();
+		$('.regions').regionModal();
+		$('.form-control').removeAttr("readonly");
+		
+});
+
+</script>

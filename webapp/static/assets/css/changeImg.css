@@ -1,0 +1,52 @@
+/* CSS Document */
+.uploadImg {
+	padding-top:10px;
+}
+.uploadImg #small {
+	display:block
+}
+.fileImg {
+	position:relative;
+	display:inline-block;
+	width:200px;
+	height:286px;
+	margin-top:10px;
+	margin-right:2%;
+	background:url(../img/uploadImgbg.png);
+}
+.axImg {
+	position:absolute;
+	top:0;
+	left:1px;
+	width:198px;
+	height:284px;
+	text-align:center;
+}
+.imgchangeDiv {
+	position:absolute;
+	left:0;
+	top:75px;
+    width:198px;
+    height:284px;
+}
+.imgchangeDiv p {
+	color:#BCBCBC
+}
+
+.fileCss{
+    position:absolute;
+	cursor:pointer;
+    top:0;
+    left:0;
+    z-index:2;
+    width:200px;
+    height:286px;
+    opacity:0;
+    filter:alpha(opacity=0);
+}
+#divChange0,#divChange1,#divChange2{ /* 该对象用户在IE下显示预览图片 */
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
+}
+#imgChange0,#imgChange1,#imgChange2{ /* 该对象只用来在IE下获得图片的原始尺寸，无其它用途 */
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/decorators/">
+	<excludes>
+		<pattern>/static/*</pattern>
+		<pattern>/images/*</pattern>
+		<pattern>/**/*.html*</pattern>
+		<pattern>/**/*?ajax*</pattern>
+		<pattern>/login*</pattern>
+		<pattern>/mobile/**</pattern>
+		
+        <pattern>/alipay/notify</pattern>
+        <pattern>/wxpay/notify</pattern>
+	</excludes>
+	
+	<decorator name="printable" page="printable.jsp" />
+	<decorator name="plain" page="plain.jsp" />
+	
+	<decorator name="admin" page="admin/main.jsp">
+		<pattern>/admin</pattern>
+		<pattern>/admin/*</pattern>
+	</decorator>
+	
+	<decorator name="member" page="member/main.jsp">
+		<pattern>/member</pattern>
+		<pattern>/member/*</pattern>
+	</decorator>
+	
+	<decorator name="helpCenter" page="helpCenter/main.jsp">
+		<pattern>/helpCenter/*</pattern>
+	</decorator>
+	
+	<decorator name="org" page="org/main.jsp">
+		<pattern>/org</pattern>
+		<pattern>/org/*</pattern>
+	</decorator>
+	
+	<decorator name="plaza" page="plaza.jsp">
+		<pattern>/plaza</pattern>
+		<pattern>/plaza/*</pattern>
+	</decorator>
+	
+	<decorator name="weixin" page="weixin.jsp">
+		<pattern>/weixin</pattern>
+		<pattern>/weixin/*</pattern>
+	</decorator>
+	
+	<decorator name="weibo" page="weibo.jsp">
+		<pattern>/weibo</pattern>
+		<pattern>/weibo/*</pattern>
+	</decorator>
+	
+    <decorator name="other" page="otherMedia.jsp">
+        <pattern>/other</pattern>
+        <pattern>/other/*</pattern>
+    </decorator>
+    
+	<decorator name="register" page="register/main.jsp">
+		<pattern>/register</pattern>
+		<pattern>/register/*</pattern>
+	</decorator>
+	
+		
+	<decorator name="default" page="default.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	
+</decorators>

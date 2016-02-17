@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	if( $('#orderMessageModal').length == 0 ){
+		$('body').append('<div id="orderMessageModal" class="modal container fade" tabindex="-1" role="dialog" data-backdrop="static" data-focus-on="textarea:first"  ></div>');
+	}
+	
+	//弹出留言板留言板
+	$('.orderMessage').click(function() {
+		$(this).text('留言');
+		var id =  $(this).data('id');
+		//排序时间
+		var data = {id: id,sort:'asc_createTime'};
+		
+		$('#orderMessageModal').loadModal('${ctx}/member/order/orderMessage?ajax', data);
+		
+	});
+
+});
+
+</script>

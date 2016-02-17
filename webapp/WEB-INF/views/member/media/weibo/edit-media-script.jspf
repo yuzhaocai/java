@@ -1,0 +1,183 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspf/common.jsp"%>
+
+<script type="text/javascript">
+	/**
+	 添加标签前验证
+	 */
+	 function checkAvailable(label) {
+			if (label.trim() == "") {
+				if($('#jGrowl').children().length<2){
+					common.showMessage('标签不能为空，请您填写正确的标签！', 'warn');
+				}else{
+					common.shake($('#jGrowl'));
+				}
+				return false;
+			}
+			var flag = true;
+			$("input:checkbox[name='tags']").each(function(i) {
+				var tag = $(this).data('name');
+				if (label.trim() == tag) {
+					flag = false;
+					if($('#jGrowl').children().length<2){
+						common.showMessage('您添加的标签已经存在，请重新输入！', 'warn');
+					}else{
+						common.shake($('#jGrowl'));
+					}
+					return false;
+				}
+			});
+			
+			return flag;
+		}
+	
+	var addTagUrl = '${ctx}/member/media/addTag?ajax';
+	var tagTemp = '<label class="checkbox-inline"><input type="checkbox" name="tags" checked="checked" value="{id}" data-name="{name}">{name}</label>';
+	
+	/**
+	 添加标签
+	 */
+	function addLabel(btn) {
+		var label = $("#tag").val();
+		var len  =  label.length;
+		if (checkAvailable(label)) {
+			 var re = /[^\u4e00-\u9fa5]/;
+			 if(re.test(label) || len<4) {
+				 //包含不是中文的字符
+				 if(!$('.tagCls')[0]){
+					 $('#tag').parent().parent().append('<p class="help-block tagCls" style="color:#a94442">请输入4~14个汉字</p>');
+				 }
+				 $(btn).button('reset'); 
+				 return;
+			 }else{
+				 //全中文
+			      $('.tagCls').remove();
+				 $(btn).button('loading');
+					var param = {name:label};
+					$.post(addTagUrl, param, function(data) {
+						$('#mediaLabels').append(tagTemp.format(data));
+						$('#tag').val('');
+						$(btn).button('reset');
+					});
+			 }
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 修改时 默认选中
+	 */
+	$(document)
+			.ready(
+					function() {
+						var hiddens = $("input[type='hidden'][id='tagsValue']")
+								.val();
+						var tags = hiddens.split(",");
+						$
+								.each(
+										tags,
+										function(index) {
+											var val = tags[index];
+											var checkboxs = $("input[type='checkbox'][name='tags'][value="
+													+ val + "]");
+											$.each(checkboxs, function() {
+												this.checked = "checked";
+											});
+										});
+					});
+
+	$(function() {
+		menu.active('#my-media');
+	});
+	
+	$.validator.setDefaults({ ignore: ":hidden:not('select')" });
+	$('#form_editMedia').validate({
+		debug : false,
+		submitHandler : function(form) {
+			common.disabled('#editMedia');
+			form.submit();
+		},
+		rules : {
+			fans : {
+				required : true,
+				digits : true,
+				rangelength:[2, 9]
+			},
+			name : {
+				required : true,
+				checkWeiBoNameEdit : true,
+				rangelength : [ 2, 26 ]
+			},
+			description : {
+				required : true
+			},
+			industryType : {
+				required : true
+			},
+			region : {
+				required : true
+			},
+			products : {
+				required : true
+			},
+			tags : {
+				required : true
+			}
+		},
+		messages : {
+			fans : {
+				required : '请填写粉丝数',
+				rangelength : '请输入2~9个数字'
+			},
+			name : {
+				required : '请填写账号',
+				rangelength : '请输入2~26个字符'
+			},
+			description : {
+				required : '请填写详情'
+			},
+			industryType : {
+				required : '请选择行业类型'
+			},
+			region : {
+				required : '请选择地区'
+			},
+			products : {
+				required : '请选择适合产品'
+			},
+			tags : {
+				required : '请至少选择一个标签'
+			}
+		}
+	});
+	
+	$.validator.addMethod("checkWeiBoNameEdit", function(value, element) {
+		var returnMsg = true;
+		jQuery.ajax({
+			type : "get",
+			url : "${ctx}/member/media/checkWeiBoNameEdit",
+			async : false,
+			cache : false,
+			data : {
+				mediaType : function() {
+					return $('.mediaType').val();
+				},
+				name :function(){
+					return $('#checkMediaName').val();
+				},
+				oldName : function(){
+					return $('.oldName').val();
+				}
+			},
+			dataType : "json",
+			success : function(msg) {
+					returnMsg = msg;
+			}
+		});
+		return returnMsg;
+	}, "媒体名称已存在，请更换昵称或认证类别");
+	
+	
+</script>

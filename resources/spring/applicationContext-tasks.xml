@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:task="http://www.springframework.org/schema/task" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    				    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+    				    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd">
+
+    <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+
+	<task:executor id="myExecutor" pool-size="5"/>
+	
+	<task:scheduler id="myScheduler" pool-size="10"/>
+	
+	<task:scheduled-tasks scheduler="myScheduler">
+		<!-- 更新发现采媒：每小时整点更新一次 -->
+	    <task:scheduled ref="sampleJob" method="findCnmeiWork" cron="0 0 0/1 * * ?"/>
+	    <!-- 更新首页悬赏金额与成交数：每周二，周四凌晨1点05分  -->
+	    <task:scheduled ref="sampleJob" method="homeDataWork" cron="0 5 1 ? * TUE,THU"/>
+	</task:scheduled-tasks>
+	
+	<bean id="sampleJob" class="com.lczy.media.jobs.SampleJob" />
+	
+</beans>

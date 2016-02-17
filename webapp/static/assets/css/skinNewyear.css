@@ -1,0 +1,59 @@
+/* CSS Document */
+
+/* 20160118 */
+
+.header-v1 .navbar.navbar-default {
+	background:#eff1f4 url(../img/newyear/newyearBG.jpg) no-repeat center top;
+}
+.header-v1 .navbar.navbar-default.falsNewyearbg{
+    position:relative;
+	height:86px;
+	background:#eff1f4 url(../img/newyear/headerbg.png) repeat-x;	
+	
+}
+.header-v1 .falsNewyearbg .falsNewyearSub{
+	position:absolute;
+	width:100%;
+	height:132px;
+	background:url(../img/newyear/newyear404Img.png) no-repeat center top;
+}
+/* login */
+.login-wrap{
+	height:100%;
+}
+.login-wrap .login-banner {
+	position:absolute;
+	top:50%;
+	margin-top:-238px;
+	height:475px;
+	background:url(../img/newyear/loginborbg.jpg) repeat-x;
+}
+.login-banner .carousel,.loginNewyearRight{
+    position:relative;
+	min-width:1200px;
+	height:475px;
+	background:url(../img/newyear/loginnewyearbg.png) no-repeat;
+}
+.login-banner .carousel{
+    background-position:top left;	
+}
+.loginNewyearRight{
+	background-position:top right;	
+}
+.loginIMGForm{
+	position:relative;
+}
+.loginBannerImg{
+	position:relative;
+	z-index:9;
+	width:789px;
+	height:460px;
+	background:url(../img/newyear/loginPNG24bg.png) no-repeat 40px 22px
+}
+.login-wrap .login-form{
+	position:absolute;
+	right:130px;
+	top:45px;
+	border-radius:10px!important;
+}
+

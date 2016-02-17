@@ -1,0 +1,105 @@
+/* Add here all your css styles (customizations) */
+
+
+
+
+/* 推荐 */
+.recommend {
+	display:table;
+	width:100%;
+	padding:10px;
+	margin-left:0;
+	margin-bottom: 20px;
+	background-color: #fff;
+	border: 1px solid #faebcc;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+	box-shadow: 0 1px 1px rgba(0,0,0,.05);
+	text-align:left;
+}
+.recommend > li {
+	position:relative;
+	float:left;
+	padding:5px;
+	margin-right:5px;
+	width:270px;
+	height:120px;	
+	background-color: #fff;
+	border:5px solid #fff;
+}
+.recommend > li:hover{	
+	border:5px solid #eee;
+}
+.recommend .recommend-img {
+	position:absolute;
+	left:5px;
+	top:5px;
+	width:100px;
+	height:100px;
+	background:#eee;
+}
+.recommend .recommend-img img {
+	width:100px;
+	height:100px;
+}
+.recommend a{
+	color:#337ab7!important;
+}
+.recommend .recommend-content {
+	padding-left:110px;
+}
+.recommend .recommend-content p {
+	font-size:90%;
+	margin-bottom:0;
+}
+.recommend .recommend-content p:first-child {
+	height:42px;
+	overflow:hidden;
+}
+.recommend .recommend-content .price {
+	position:absolute;
+	bottom:40px;
+}
+.recommend .recommend-content button {
+	position:absolute;
+	bottom:5px;
+}
+.recommend .recommend-ad {
+	display:block;
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+	width:100px;
+	height:100px;
+	overflow:hidden;
+	background-color:#eee;
+}
+
+.req-list > li {
+	padding:8px 15px;
+}
+.req-list > li > strong {
+	position:absolute;
+	text-align:right;
+	width:110px;
+	font-weight:normal;
+}
+.req-list > li > span {
+	display:block;
+	padding-left:110px;
+	color:#999;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

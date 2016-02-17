@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspf/common.jsp" %>
+
+                 <div class="form-group form-group-sm">
+                     <label class="control-label col-sm-2 w150"><span class="color-red">*</span>项目预算:</label>
+                     <div class="col-sm-4 has-feedback">
+                     	<div class="input-group w300">
+                             <input type="text" class="form-control" placeholder="" id="budget" name="budget" value="${param.budget }" maxlength="10">
+                             <span class="input-group-addon">元</span>
+                         </div>                          
+                     </div>   
+                     <label class="control-label col-sm-2 w150"><span class="color-red">*</span>拟邀媒体数:</label>
+                     <div class="col-sm-4 has-feedback">
+                     	<div class="input-group w300">
+                             <input type="text" class="form-control" placeholder="" id="inviteNum" name="inviteNum" value="${param.inviteNum }" maxlength="3">
+                             <span class="input-group-addon">个</span>
+                         </div>
+                     </div>
+                 </div>
+                 
+                 <div class="form-group form-group-sm">
+                     <label class="control-label col-sm-2 w150"><span class="color-red">*</span>媒体类别:</label> 
+                     <div class="col-sm-4 has-feedback">
+                         <select data-placeholder="请选择媒体类别" class="form-control chosen-select w300" tabindex="0" id="mediaTypes" name="mediaTypes" required>
+                         	<option value=""></option>
+                            <zy:options items="${mediaTypes }" itemLabel="itemName" itemValue="itemCode" selecteds="${param.mediaTypes }"/>
+                         </select>
+                     </div>  
+                     <label class="control-label col-sm-2 w150"><span class="color-red">*</span>地区:</label> 
+                     <div class="col-sm-4 has-feedback">
+                         <select data-placeholder="请选择地区" class="form-control chosen-select w300" multiple tabindex="1" id="regions" name="regions">
+                         	<option value="ALL" <c:if test="${param.industryTypes eq 'ALL' }">selected</c:if> >全国</option>
+                         	<zy:options items="${regions }" itemLabel="name" itemValue="id" selecteds="${paramValues.regions }"/>
+                         </select>
+                     </div>
+                 </div>
+                 <div class="form-group form-group-sm">
+                     <label class="control-label col-sm-2 w150"><span class="color-red">*</span>服务类别:</label>
+                     <div class="col-sm-4 has-feedback"> 
+                         <select data-placeholder="请选择服务类别" class="form-control chosen-select w300" tabindex="2" id="serviceTypes" name="serviceTypes">
+                         	<option value=""></option>
+                         	<zy:options items="${serviceTypes }" itemLabel="itemName" itemValue="itemCode" selecteds="${param.serviceTypes }"/>
+                         </select>
+                     </div>
+                     <label class="control-label col-sm-2 w150"><span class="color-red">*</span>行业类型:</label> 
+                     <div class="col-sm-4 has-feedback"> 
+                         <select data-placeholder="请选择行业类型" class="form-control chosen-select w300" multiple tabindex="3" id="industryTypes" name="industryTypes">
+                         	<option value="ALL" <c:if test="${param.industryTypes eq 'ALL' }">selected</c:if> >全部</option>
+                         	<zy:options items="${industryTypes }" itemLabel="itemName" itemValue="itemCode" selecteds="${paramValues.industryTypes }"/>
+                         </select>
+                     </div>                               
+                 </div>

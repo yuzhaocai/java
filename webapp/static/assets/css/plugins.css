@@ -1,0 +1,488 @@
+/* 
+ * Version:1.0
+ * Author: @TinaZ
+ * Website:www.cnmei.com
+*/
+/* 20160120 begin */
+/*Back To Top
+------------------------------------*/
+#topcontrol {
+  z-index: 99;
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
+  background: #f4f4f4;
+  color:#db1111;
+  position: relative;
+  right: 32px !important;
+  bottom: 30px !important;
+  border-radius: 3px !important;
+  overflow:hidden;
+}
+#topcontrol:after {
+  top:0;
+  right:0;
+  content: "\f106";
+  width:35px;
+  font-size:30px;
+  line-height:35px;
+  position: absolute;
+  text-align: center;
+  font-family: FontAwesome;
+}
+#topcontrol:hover:after {
+  top:2px;
+  right:0;
+  content:"返回顶部";
+  font-size:12px;
+  line-height:16px;
+  position: absolute;
+  text-align: center;
+  font-family: FontAwesome;
+}
+#topcontrol:hover {
+  width:35px;
+  color: #fff;
+  background: #db1111;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.floatRShow{
+	position:fixed;
+	bottom:436px;
+	right:6px;
+	z-index:99;
+	width:84px;
+	padding-top:80px;
+	text-align:center;
+	background:url(../img/newyear/shengxiao.png) no-repeat;
+	background-size:100% 100%
+}
+.floatRCon{
+	position:fixed;
+	right:32px;
+	width:35px;
+	background-color:#f4f4f4;
+	border-radius:3px!important;
+}
+.floatRCon a{
+	position:absolute;
+	top:0;
+	right:0;
+	width:35px;
+	overflow:hidden;
+	cursor:pointer;
+	border-radius:3px!important;
+}
+.shopCarBor{
+	bottom:346px;
+	height:90px;
+}
+.shopCar{
+	height:90px;
+}
+.shopCar:after{
+	position:absolute;
+	top:5px;
+	right:3px;
+	content:url(../img/floatRC/shopcarimg.png);
+}
+.shopCar:hover:after{
+	content:url(../img/floatRC/shopcarimgH.png);
+}
+.shopCar:hover{
+	width:35px;
+	height:90px;
+	background:#db1111;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;  
+}
+.hasGoods,.hasGoods .shopCar,.hasGoods .shopCar:hover{
+	height:112px;
+}
+.hasGoods{
+	bottom:324px;
+}
+.shopCar span{
+  display:inline-block;
+  width:20px;
+  height:20px;
+  margin:83px 8px 0;
+  font-family:Arial;
+  font-weight:700;
+  line-height:20px;
+  color:#fff;
+  text-align:center;
+  background-color:#db1111;
+  border-radius:10px!important;
+}
+.shopCar:hover span{
+	background-color:#fff;
+	color:#db1111;
+}
+.addGood{
+	position:fixed;
+	bottom:320px;
+	right:100px;
+	z-index:99999em;
+	width:30px;
+	height:30px;
+	color:#db1111;
+	font-family:Arial;
+	font-size:20px;
+	line-height:30px;
+	font-weight:700;
+}
+.animateAdd{
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-o-transition: opacity 1s;
+	transition: opacity 1s;  
+}
+
+
+.QQService{
+	bottom:228px;
+	height:90px;
+}
+.QQChart,.serviceTel{
+	height:45px;
+ }
+.QQChart:before,.serviceTel:before{
+	position:absolute;
+	top:12px;
+	right:45px;
+	font-size:14px;
+	line-height:22px
+}
+.QQChart:before{
+	right:140px;
+	content:"QQ:";
+}
+.QQChart:after{
+	position:absolute;
+	top:2px;
+	right:3px;
+	content:url(../img/floatRC/QQimg.png);
+}
+.QQChart:hover:after{
+	content:url(../img/floatRC/QQimgH.png);
+}
+.QQChart:hover,.serviceTel:hover{
+	width:180px;
+	color: #fff;
+	background:#db1111;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;  
+ }
+
+.floatRCon .serviceTel{
+	top:45px;
+ }
+.serviceTel:before{
+	content:"电话:400-006-0586";
+}
+.serviceTel:after{
+	position:absolute;
+	top:2px;
+	right:2px;
+	content:url(../img/floatRC/iconService.png);
+}
+.serviceTel:hover:after{
+	content:url(../img/floatRC/iconServiceH.png);
+}
+
+.qtTop{
+	bottom:65px;
+	height:115px;
+}
+.qtTop a{
+	height:35px;
+}
+#complaintControl:before,.myCollect:before{
+	position:absolute;
+	top:2px;
+	right:45px;
+	font-size:14px;
+	font-weight:bold;
+	line-height:30px;
+}
+#complaintControl:before{
+	content:"投诉建议";
+}
+#complaintControl:after{
+	position:absolute;
+	top:2px;
+	right:12px;
+	content: "\f040";
+	font-size:16px;
+	line-height:30px;
+	font-family: FontAwesome;
+ }
+ #complaintControl:hover,.myCollect:hover{
+	width:115px;
+	color: #fff;
+	background:#db1111;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;  
+ }
+ .qtTop .myCollect{ 
+	 top:35px; 
+  } 
+ .myCollect:after{
+	position:absolute;
+	top:2px;
+	right:8px;
+	content:"\e143";
+	font-family:'Glyphicons Halflings';  
+	font-size:22px;
+ }
+ .myCollect:before{
+	content:"收藏本页";
+ }
+ 
+.floatRCon.qtTop .QRcode{
+	 top:75px;
+	 overflow:inherit
+ }
+ .QRcode:hover:before{
+	position:absolute;
+	top:-165px;
+	right:30px;
+	line-height:0;
+	content:url(../img/floatRC/QRcode.png);
+}
+.QRcode:hover{
+	width:220px;
+	height:210px;
+	color:#fff;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;  
+ }
+.QRcode:after{
+	position:absolute;
+	top:0;
+	right:0;
+	width:35px;
+	text-align:center;
+	content: "\f029";
+	font-size:24px;
+	line-height:35px;
+	font-family: FontAwesome;
+ }
+ .QRcode:hover:after{
+	 background-color:#db1111;
+ }
+/* 20160120 end */
+
+
+/*投诉与建议*/
+.complaintsAll{
+  border-radius:15px!important;
+  border:1px solid #aeaeae;
+}
+.complaintsAll .modal-header{
+  border-bottom:none;
+  padding-left:18px
+}
+.complaintMain{
+	border:1px solid #cfcfcf;
+	background-color:#f4f4f4;
+	margin:0 16px 16px;
+}
+.modal-header .btnColor{
+	color:#818181;
+	opacity:1;
+	font-size:36px;
+	font-weight:normal;
+	margin-top:-8px
+}
+.tab_box .alert-info{
+    color:#5d5d5d;
+    background-color:#fff;
+	border-color:#ccc;
+}
+.numList{
+    font-size:12px;
+	line-height:1.1;	
+}
+.numList span{
+	display:inline-block;
+	width:13px;
+	height:13px;
+	margin-right:4px;
+	text-align:center;
+	color:#fff;
+	border-radius:8px!important;
+	background-color:#818181
+}
+.complaintFooter{
+   padding:0 15px 25px;
+   text-align:center;
+   border-top:none
+}
+.complaintFooter .btn-u.btn-u-red{
+	letter-spacing:5px;
+	padding:5px 32px;
+	margin:0 15px;
+	border-radius:2px!important;
+}
+.complaintFooter .complaintCancel,.complaintFooter .complaintCancel:hover{
+	background:transparent linear-gradient(#acacac, #606060);
+}
+.form-horizontal .txtLeft{
+	text-align:left;
+	padding-right:0
+}
+.noPaleft{
+	padding-left:0;
+}
+
+/*qq插件*/
+#qqWpa{
+	display:none;
+}
+#qqWpa iframe{
+    position: fixed;
+    z-index: 9999;
+    width: 92px;
+    height:22px;
+    bottom:284px;
+    right:75px;
+}
+
+.qqControlshow{
+	width:180px!important;
+	color: #fff;
+	background:#db1111 url(../img/floatRC/QQimgH.png) no-repeat 147px 2px;
+}
+.qqControlshow:after{
+	content:''!important;
+}
+
+/*自定义简单tab选项卡*/
+.tab_box > div {
+	display:none;
+}
+.tab_box > div.open {
+	display:block;
+}
+/* 文件/图片上传 jasny-bootstrap.css  2015.09.14  
+-------------------------------------*/
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.btn-file > input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-size: 23px;
+  cursor: pointer;
+  filter: alpha(opacity=0);
+  opacity: 0;
+
+  direction: ltr;
+}
+.fileinput {
+  display: inline-block;
+  margin-bottom: 9px;
+}
+.fileinput .form-control {
+  display: inline-block;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  cursor: text;
+}
+.fileinput .thumbnail {
+  display: inline-block;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+}
+.fileinput .thumbnail > img {
+  max-height: 100%;
+}
+.fileinput .btn {
+  vertical-align: middle;
+}
+.fileinput-exists .fileinput-new,
+.fileinput-new .fileinput-exists {
+  display: none;
+}
+.fileinput-inline .fileinput-controls {
+  display: inline;
+}
+.fileinput-filename {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+  width:80%;
+}
+.form-control .fileinput-filename {
+  vertical-align: bottom;
+}
+.fileinput.input-group {
+  display: table;
+}
+.fileinput.input-group > * {
+  position: relative;
+  z-index: 2;
+}
+.fileinput.input-group > .btn-file {
+  z-index: 1;
+}
+.fileinput-new.input-group .btn-file,
+.fileinput-new .input-group .btn-file {
+  border-radius: 0 4px 4px 0;
+}
+.fileinput-new.input-group .btn-file.btn-xs,
+.fileinput-new .input-group .btn-file.btn-xs,
+.fileinput-new.input-group .btn-file.btn-sm,
+.fileinput-new .input-group .btn-file.btn-sm {
+  border-radius: 0 3px 3px 0;
+}
+.fileinput-new.input-group .btn-file.btn-lg,
+.fileinput-new .input-group .btn-file.btn-lg {
+  border-radius: 0 6px 6px 0;
+}
+.form-group.has-warning .fileinput .fileinput-preview {
+  color: #8a6d3b;
+}
+.form-group.has-warning .fileinput .thumbnail {
+  border-color: #faebcc;
+}
+.form-group.has-error .fileinput .fileinput-preview {
+  color: #a94442;
+}
+.form-group.has-error .fileinput .thumbnail {
+  border-color: #ebccd1;
+}
+.form-group.has-success .fileinput .fileinput-preview {
+  color: #3c763d;
+}
+.form-group.has-success .fileinput .thumbnail {
+  border-color: #d6e9c6;
+}
+.input-group-addon:not(:first-child) {
+  border-left: 0;
+}
+

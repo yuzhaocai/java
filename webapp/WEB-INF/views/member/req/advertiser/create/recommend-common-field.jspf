@@ -1,0 +1,163 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspf/common.jsp" %>
+     
+<!-- Main -->
+<div class="main-panel">
+    <div class="headline">
+    	<h5>创建新需求 - 选择${param.mediaTypeName }媒体</h5>
+    </div>
+    <!-- mTab v2 -->          
+    <div class="pad">
+		<div class="topwrap">
+	 	
+			<form id="create-form" class="form-horizontal" action="${ctx}/member/req/advertiser/create/next" method="post">
+				<input type="hidden" name="hasArticle" value="true">
+				<input type="hidden" name="budget" value="${req.budget }" >
+				<input type="hidden" name="inviteNum" value="${req.inviteNum }" >
+				<input type="hidden" name="currentMediaType" value="${req.currentMediaType }" >
+				<c:forEach items="${req.mediaTypes }" var="item" varStatus="stat">
+				<input type="hidden" name="mediaTypes[${stat.index }]" value="${item }" >
+				</c:forEach>
+				<c:forEach items="${req.doneMediaTypes }" var="item" varStatus="stat">
+				<input type="hidden" name="doneMediaTypes[${stat.index }]" value="${item }" >
+				</c:forEach>
+				<c:forEach items="${req.regions }" var="item" varStatus="stat">
+				<input type="hidden" name="regions[${stat.index }]"    value="${item }" >
+				</c:forEach>
+				<c:forEach items="${req.industryTypes }" var="item" varStatus="stat">
+				<input type="hidden" name="industryTypes[${stat.index }]" value="${item }" >
+				</c:forEach>
+				<c:forEach items="${req.quotes }" var="item" varStatus="stat">
+				<input type="hidden" name="quotes[${stat.index }].media.id" value="${item.media.id }" class="quotes" >
+				<input type="hidden" name="quotes[${stat.index }].type"     value="${item.type }" >
+				<input type="hidden" name="quotes[${stat.index }].price"    value="${item.price }" >
+				</c:forEach>
+       			
+        	<div class="steps">
+        	
+                <ul class="steps-tab clearfix">
+                    <li class="done"><a>填写预算</a></li>
+                    <c:forEach items="${naviBars }" var="item">
+                    <li class="${item.status }"><a>${item.name }</a></li>
+                    </c:forEach>
+                    <li class="disabled"><a>填写需求详情</a></li>
+                </ul>
+                
+                <div class="steps-panel clearfix"> 
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"><span class="color-red">*</span>服务类别:</label>
+                                <div class="col-sm-4 has-feedback"> 
+			                   		<select class="form-control" name="serviceTypes" id="serviceTypes"
+			                   			data-title="选择服务类别" data-class="multiple-P45">
+			                   			<option value="">请选择...</option>
+			                   			<zy:options items="${serviceTypes }" itemLabel="itemName" itemValue="itemCode"/>
+			                   		</select>
+                                </div>
+                            </div>
+                        </div><!--//col-sm-8-->
+                        <div class="col-sm-4">
+		                   <div class="actions clearfix">
+		                       <button type="button" class="btn-u btn-u-red pull-right" id="btn-gen-project" >生成推荐方案</button>
+		                   </div>
+                        </div><!--//col-sm-4-->
+                    </div><!--//row-->
+                    
+                </div><!--//steps-panel-->
+
+              </div>
+          </form>
+      </div>                  
+            
+	<div class="panel panel-default select-media">
+     <div style="top: 0px; z-index: 1000;" class="panel-heading affix-top">
+     	<span class="color-red">*</span>${param.mediaTypeName }媒体推荐方案<small class="highlight pull-right">注：系统估价根据媒体该服务的报价、过往实际成交价综合计算得出</small>
+     </div>
+     <div class="panel-body media-group hide"> 
+     
+      <div class="clearfix"><h5><strong>一类媒体</strong> </h5></div>
+      <table class="table table-hover table-condensed" border="0" width="100%">
+        <thead>
+        <tr>
+          <th scope="col" class="text-left"  width="20%">媒体名称</th>
+          <th scope="col"  width="10%" >大类</th>
+          <th scope="col"  width="15%">认证类别</th>
+<!--           <th scope="col">行业</th> -->
+          <th scope="col"  width="15%">地区</th>
+          <th scope="col"  width="10%">粉丝数</th>
+          <th scope="col"  width="10%">简介及案例</th>
+          <th scope="col"  width="10%">系统估价</th>
+          <th scope="col">选择</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody id="level1" class="medias-body" data-level="1">
+
+        </tbody>
+      </table>
+      
+      <div class="clearfix"><h5><strong>二类媒体</strong> </h5> </div>
+      <table class="table table-hover table-condensed" border="0" width="100%">                       
+        <thead>
+        <tr class="">
+          <th scope="col" class="text-left"  width="20%">媒体名称</th>
+          <th scope="col"  width="10%" >大类</th>
+          <th scope="col"  width="15%">认证类别</th>
+<!--           <th scope="col">行业</th> -->
+          <th scope="col"  width="15%">地区</th>
+          <th scope="col"  width="10%">粉丝数</th>
+          <th scope="col"  width="10%">简介及案例</th>
+          <th scope="col"  width="10%">系统估价</th>
+          <th scope="col">选择</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody id="level2" class="medias-body" data-level="2">
+
+        </tbody>
+      </table>
+      
+      <div class="clearfix"><h5><strong>三类媒体</strong> </h5></div>
+      <table class="table table-hover table-condensed" border="0" width="100%">
+        <thead>
+        <tr class="">
+          <th scope="col" class="text-left"  width="20%">媒体名称</th>
+          <th scope="col"  width="10%" >大类</th>
+          <th scope="col"  width="15%">认证类别</th>
+<!--           <th scope="col">行业</th> -->
+          <th scope="col"  width="15%">地区</th>
+          <th scope="col"  width="10%">粉丝数</th>
+          <th scope="col"  width="10%">简介及案例</th>
+          <th scope="col"  width="10%">系统估价</th>
+          <th scope="col">选择</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody id="level3" class="medias-body" data-level="3">
+
+        </tbody>
+      </table>
+      
+     
+     </div>
+     
+      <div class="panel-footer">
+      	<div class="row">
+          <div class="col-xs-6">
+              <button class="btn-u btn-u-red" type="button" id="btn-self-select" >自行挑选媒体</button>
+          <!-- space -->
+          </div>
+          <div class="col-xs-6 text-right highlight">
+              <p class="price">共选择媒体：<span id="totalMedias" class="mediaCount highlight">0</span> 家，订单共计金额：<strong><small>￥</small><span id="totalAmount">0</span></strong>元
+              <button class="btn-u btn-u-red ml20" type="submit" id="btn-next" >下一步</button>
+              </p>
+          </div>
+      	</div>
+      </div>
+      
+    </div>
+      
+  </div><!-- End Pad -->
+</div>
+<!-- End Main -->

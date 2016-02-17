@@ -1,0 +1,129 @@
+
+/*Header Fixed
+------------------------------------*/
+.ie8 .header-fixed .header.header-fixed-shrink {
+	background: #fff;
+}
+
+/*Blog Latest Tweets
+------------------------------------*/
+.ie8 .blog-twitter .blog-twitter-inner:after,
+.ie8 .blog-twitter .blog-twitter-inner:before {
+	border: none;
+}
+
+.ie8 .our-clients img {
+	width: 100%;
+	height: 100px;
+	vertical-align: inherit;
+}
+
+.ie8 .our-clients .img-hover {
+	display: none;
+}
+
+/*Pricing Stickers*/
+.ie8 .sticker-left {
+	width: 90px;
+	text-align: right;
+	background: #72c02c;
+}
+
+.ie8 .sticker-right {
+	width: 100px;
+	text-align: left;
+	background: #e74c3c;
+}
+
+
+/* by tina */
+.modal-dialog {
+  width: 600px;
+  margin: 30px auto;
+}
+.modal-lg {
+  width: 900px;
+}
+
+/*Block*/
+.container {width:1170px!important; padding-left:0; padding-right:0;}
+
+/*Header*/
+.h-search-block .hotwords {top:8px;}
+/*Form*/
+.form-horizontal .control-label {
+	float:left;
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+}
+.form-horizontal .form-group div[class*=col-]{ float:left;}
+.form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+.form-inline .form-control {
+	display:inline-block; 
+	width:auto; 
+	vertical-align: middle;
+}
+.form-inline .control-label {
+	display:inline-block; 
+	max-width:none!important;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+/*List*/
+
+.list-inline.hotwords > li {
+	float:left;
+	margin-right:5px;
+}
+/*metro*/
+.metro .metro-block > .block > .info{
+	display:none;
+	background: #ff5256;
+    opacity: 1;
+	
+}
+
+.metro .metro-block > .block:hover > .info,
+.metro .metro-block > .block.active > .info {
+	display:block;
+	background: #ff5256;
+    opacity: 1;
+}
+
+/*鎶藉娲诲姩閬僵*/
+.fudongceng {
+	background:url(../img/ie8-zhezhao.png) repeat;
+}
+
+/*浮动：战略合作图标-------20160113*/
+.stick:before {
+	display:block;
+	border:none;
+	width:60px;
+	height:60px;
+	background:none;
+}
+.stick:after {
+	content:none;
+}
+
+/*Clo*/
+
+.col-xs-1,.col-sm-1,.col-md-1,.col-lg-1 {width:8.33333333%;}
+.col-xs-2,.col-sm-2,.col-md-2,.col-lg-2{width:16.66666667%;}
+.col-xs-3,.col-sm-3,.col-md-3,.col-lg-3{width:25%;}
+.col-xs-4,.col-sm-4,.col-md-4,.col-lg-4{width:33.33333333%;}
+.col-xs-5,.col-sm-5,.col-md-5,.col-lg-5{width:41.66666667%;}
+.col-xs-6,.col-sm-6,.col-md-6,.col-lg-6{width:50%;}
+.col-xs-7,.col-sm-7,.col-md-7,.col-lg-7{width:58.33333333%;}
+.col-xs-8,.col-sm-8,.col-md-8,.col-lg-8{width:66.66666667%;}
+.col-xs-9,.col-sm-9,.col-md-9,.col-lg-9{width:75%;}
+.col-xs-10,.col-sm-10,.col-md-10,.col-lg-10{width:83.33333333%;}
+.col-xs-11,.col-sm-11,.col-md-11,.col-lg-11{width:91.66666667%;}
+.col-xs-12,.col-sm-12,.col-md-12,.col-lg-12{{width:100%;}
+

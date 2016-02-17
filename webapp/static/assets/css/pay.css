@@ -1,0 +1,96 @@
+/* 充值 */
+#bank-select {
+	height:30px;
+}
+/* deposit-panel */
+.deposit-panel .dashed-box {
+	display:table;
+	width:100%;
+	padding:15px;
+	border:1px dashed #ddd;
+	background-color: #fff;
+	color:#555;
+}
+ 
+.deposit-panel .dashed-box > .dashed-circle,
+.deposit-panel .dashed-box > strong {
+	display:inline-block;
+	float:left;
+}
+.deposit-panel .dashed-box img {
+	float:right;
+	/*width:83px;*/
+	height:52px;
+}
+.deposit-panel .form-horizontal div[class*="col-"]{
+	padding-left:0;
+	padding-right:0;
+}
+.deposit-panel .price {
+	line-height:34px;
+	margin-bottom:0;
+	font-size:18px;
+}
+.deposit-panel .price small {
+	padding-left:5px;
+	font-size:12px;
+}
+.deposit-panel .dashed-box > strong {
+	font-size:18px;
+	height:32px;
+	line-height:32px;
+	margin:10px 0 10px;
+}
+.dashed-circle {
+	width:32px;
+	height:32px;
+	margin:10px;
+	text-align:center;
+	line-height:32px;
+	font-size:16px;
+	color:#fff;
+	border-radius:50%!important;
+	border:1px dashed #ccc;	
+}
+.dashed-box.active {
+	border:1px dashed #e45050;
+	}
+.dashed-box.active .dashed-circle {
+	color:#fff;
+	background-color:#e45050;
+	border-color:#E4393C;
+}
+
+.dashed-box .intro {
+	float:left;
+	width:210px;
+	height:32px;
+	padding:5px 10px;
+	color:#ccc;
+}
+/*
+-------------------------*/
+.qr {
+	width:300px;
+	height:300px;
+	margin:auto;
+}
+.qr-box {
+	width:100%;
+	height:100%;
+	margin-top:20px;
+	margin-bottom:20px;
+	border:1px solid #ddd;
+}
+.qr-box img {
+	width:100%;
+	height:100%;
+}
+.qr-info {
+	padding:10px 15px;
+	color:#ffffff;
+	background-color:#e45050;
+}
+
+
+

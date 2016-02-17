@@ -1,0 +1,28 @@
+.header-v1 {
+	background: url(../img/yuandan-bg.png) no-repeat center bottom;
+}
+.header-v1 .navbar.navbar-default {
+	background: url(../img/yuandan-bg-left.png) no-repeat left top,
+		url(../img/yuandan-bg-right.png) no-repeat right top;}
+.header-v1 .navbar-brand {
+	margin-top:15px;
+}
+.header-v1 .navbar-header .col-xs-3 {
+	width:20%;
+}
+.header-v1 .navbar-header .col-xs-5 {
+	width: 48%;
+}
+.header-v1 .navbar-header .col-xs-4 {
+	width: 32%;
+}
+.search-wrap {
+	margin-top:17px;
+}
+
+.monkey {
+	position: absolute;
+	margin-left: 169px;
+	margin-top:60px;
+	z-index:9999
+}

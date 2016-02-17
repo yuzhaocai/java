@@ -1,0 +1,147 @@
+/* 充值 */
+#bank-select {
+	height:30px;
+}
+/* deposit-panel */
+.deposit-panel .dashed-box {
+	display:table;
+	width:100%;
+	padding:15px;
+	border:1px dashed #ddd;
+	background-color: #fff;
+	color:#555;
+}
+.deposit-panel .dashed-box > .dashed-circle,
+.deposit-panel .dashed-box > strong {
+	display:inline-block;
+	float:left;
+}
+.deposit-panel .dashed-box img {
+	float:right;
+	width:83px;
+	height:52px;
+}
+.deposit-panel .form-horizontal div[class*="col-"]{
+	padding-left:0;
+	padding-right:0;
+}
+.deposit-panel .price {
+	line-height:34px;
+	margin-bottom:0;
+	font-size:18px;
+}
+.deposit-panel .price small {
+	padding-left:5px;
+	font-size:12px;
+}
+.deposit-panel .dashed-box > strong {
+	font-size:18px;
+	height:32px;
+	line-height:32px;
+	margin:10px 0 10px;
+}
+.dashed-circle {
+	width:32px;
+	height:32px;
+	margin:10px;
+	text-align:center;
+	line-height:32px;
+	font-size:16px;
+	color:#fff;
+	border-radius:50%!important;
+	border:1px dashed #ccc;	
+}
+.dashed-box.active .dashed-circle {
+	color:#fff;
+	background-color:#e45050;
+	border-color:#E4393C;
+}
+
+.dashed-box .intro {
+	float:left;
+	width:210px;
+	height:32px;
+	padding:5px 10px;
+	color:#ccc;
+}
+
+.bank-list,
+.bank-list ul {
+	display:table;
+}
+.bank-list ul > li {
+	float:left;
+	display:inline;
+	height: 33px;
+	width: 218px;
+	margin-bottom: 10px;
+	padding:0;
+}
+.bank-list li > label {
+	float: left;
+	display: inline;
+	width: 142px;
+	height: 33px;
+	border: solid 1px #ddd;
+	margin-bottom:0;
+	
+}
+.bank-list li > input {
+	float: left;
+	display: inline;
+	width: 13px;
+	height: 13px;
+	margin: 10px 10px 0 0;
+}
+.bank-alipay, .bank-icbc, .bank-ccb, .bank-abchina, .bank-psbc, .bank-bankcomm, .bank-cmbchina, .bank-boc, .bank-cebbank, .bank-ecitic, .bank-spdb, .bank-cmbc, .bank-cib, .bank-pingan, .bank-cgbchina, .bank-srcb, .bank-bankofshanghai, .bank-nbcb, .bank-hccb, .bank-bankofbeijing, .bank-bjrcb, .bank-fudian-bank, .bank-wzcb {
+	  background: url("http://gtms04.alicdn.com/tps/i4/T17IKqFbXeXXbb9.QQ-442-311.png") no-repeat;
+}
+
+.bank-alipay,
+.bank-icbc,
+.bank-ccb,
+.bank-abchina,
+.bank-psbc,
+.bank-bankcomm,
+.bank-cmbchina,
+.bank-boc,
+.bank-cebbank,
+.bank-ecitic,
+.bank-spdb,
+.bank-cmbc,
+.bank-cib,
+.bank-pingan,
+.bank-cgbchina,
+.bank-srcb,
+.bank-bankofshanghai,
+.bank-nbcb,
+.bank-hccb,
+.bank-bankofbeijing,
+.bank-bjrcb,
+.bank-fudian-bank,
+.bank-wzcb{width: 142px; height: 31px; overflow: hidden;}
+
+.bank-alipay{background-position: 0 0;}
+.bank-icbc{background-position: -150px 0;}
+.bank-ccb{background-position: -300px 0;}
+.bank-abchina{background-position: 0 -40px;}
+.bank-psbc{background-position: -150px -40px;}
+.bank-bankcomm{background-position: -300px -40px;}
+.bank-cmbchina{background-position: 0 -80px;}
+.bank-boc{background-position: -150px -80px;}
+.bank-cebbank{background-position: -300px -80px;}
+.bank-ecitic{background-position: 0 -120px;}
+.bank-spdb{background-position: -150px -120px;}
+.bank-cmbc{background-position: -300px -120px;}
+.bank-cib{background-position: 0 -160px;}
+.bank-pingan{background-position: -150px -160px;}
+.bank-cgbchina{background-position: -300px -160px;}
+.bank-srcb{background-position: 0 -200px;}
+.bank-bankofshanghai{background-position: -150px -200px;}
+.bank-nbcb{background-position: -300px -200px;}
+.bank-hccb{background-position: 0 -240px;}
+.bank-bankofbeijing{background-position: -150px -240px;}
+.bank-bjrcb{background-position: -300px -240px;}
+.bank-fudian-bank{background-position: 0 -280px;}
+.bank-wzcb{background-position: -150px -280px;}
+

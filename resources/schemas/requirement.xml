@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<schema name="requirement" version="1.5">
+	<field name="_version_" type="long" indexed="true" stored="true"/>
+
+	<field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
+	<field name="name" type="text_ik" indexed="true" stored="true" required="true" multiValued="false" /> 
+	<field name="summary" type="text_ik" indexed="true" stored="true" required="false" multiValued="false" />
+	<field name="startTime" type="long" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="endTime" type="long" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="deadline" type="long" indexed="true" stored="true" required="false" multiValued="false" />
+	<field name="isPublic" type="boolean" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="status" type="string" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="createTime" type="long" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="modifyTime" type="long" indexed="true" stored="true" required="false" multiValued="false" />
+	<field name="mediaTypes" type="string" indexed="true" stored="true" required="false" multiValued="true" /> 
+	<field name="serviceTypes" type="string" indexed="true" stored="true" required="false" multiValued="true" /> 
+	<field name="regions" type="string" indexed="true" stored="true" required="false" multiValued="true" /> 
+	<field name="industryTypes" type="string" indexed="true" stored="true" required="false" multiValued="true" />
+	<field name="industryTypeNames" type="text_ik" indexed="true" stored="true" required="false" multiValued="true" />
+	<field name="budget" type="int" indexed="true" stored="true" required="false" multiValued="false" />
+	<field name="article" type="string" indexed="true" stored="true" required="false" multiValued="false" /> 
+	<field name="allowChange" type="boolean" indexed="true" stored="true" required="false" multiValued="false" /> 
+
+ 	<uniqueKey>id</uniqueKey>
+ 	
+ 	<fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+    <fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="date" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0"/>
+    
+	<fieldType name="text_ik" class="solr.TextField">
+		<analyzer>
+			<tokenizer class="org.wltea.analyzer.solr.IKTokenizerFactory" useSmart="false" />
+		</analyzer>
+	</fieldType>
+
+</schema>

@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript">
+//-----------------------/查看需求媒体信息 start
+$(document).ready(function() {
+		if(!$('.myReqQueryMiediaForm')[0]){
+			$('body').append('<div class="myReqQueryMiediaForm modal container fade" tabindex="-1" role="dialog"  data-backdrop="static"></div>');
+		}
+});
+
+
+var $selectAllForm = $('.myReqQueryMiediaForm');
+function bindSelectMediaQuery() {
+	//未反馈预约单可以删除
+	$('.deleteMedia').click(function() {
+		var id = $(this).data('id');
+		var $tr = $(this).closest('tr');
+		var name = $tr.children().eq(2).text();
+		bootbox.confirm("您确定要删除媒体： <span style='color:red'>" + name+ "</span>？",
+			function(result) {
+				if (result) {
+					var mediaId = $('.myReqQueryMiedia').data('req-id');
+					$selectAllForm.modal('loading');
+					
+					$.post('${ctx}/member/req/advertiser/deleteMedia/' + id + '?ajax', function(data) {
+						data = $.parseJSON(data);
+						if( data.result ) {			
+							common.showMessage('删除媒体成功!');
+							$('.mediaCount').text($('.mediaCount').text()-1);
+							$tr.remove();
+						} else {
+							common.showMessage(data.content, 'warn');
+						}
+						$selectAllForm.modal('loading');
+					});
+				}
+		});
+	});
+}
+
+
+function deleteMedia(){
+	bootbox.confirm(
+			"您确定要禁言用户： <span style='color:red'>" + name
+					+ "</span>？",
+			function(result) {
+				if (result) {
+					
+				}
+			})
+}
+
+//-弹出选择媒体对话框
+$('.queryMediaCount').click(function() {
+	var id = $(this).data('req-id');
+	var data = {id: id};
+	if($('.mediaCount').text()!=0){
+		$('.myReqQueryMiediaForm').loadModal('${ctx}/member/req/advertiser/selectAllMedia?ajax', data, bindSelectMediaQuery);
+	}else{
+		common.alert("此需求尚未选择接单媒体!");	
+	}
+});
+//-----------------------/查看需求媒体信息 end
+</script>
